@@ -1,0 +1,33 @@
+:local(.Input) {
+  position: relative;
+  box-sizing: border-box;
+
+  .input__text {
+    border: solid 1px var(--silver-darken-87);
+    border-radius: 16px;
+    outline: none;
+    font-size: 12px;
+    padding: 3px 12px;
+
+    &:focus {
+      border: solid 1px var(--blue-darken-55) !important;
+      box-shadow: 0 0 0 4px var(--blue-lighten-82), 0 0 0 1px var(--silver-darken-80) inset;
+    }
+  }
+  
+  .input__clear {
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    border: none;
+    outline: none;
+    border-radius: 16px;
+    background-color: transparent;
+
+    &:hover {
+      background-color: var(--silver-darken-87);
+    }
+  }
+}
