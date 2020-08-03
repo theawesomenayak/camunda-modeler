@@ -12,8 +12,6 @@ import React, { PureComponent } from 'react';
 
 import classNames from 'classnames';
 
-import CloseIcon from '../../../../resources/icons/Close.svg';
-
 import css from './Input.less';
 
 export default class Input extends PureComponent {
@@ -32,7 +30,8 @@ export default class Input extends PureComponent {
   render() {
     const {
       className,
-      placeholder
+      placeholder,
+      value
     } = this.props;
 
     return (
@@ -40,10 +39,15 @@ export default class Input extends PureComponent {
         <input
           className="input__text"
           type="text"
-          placeholder={ placeholder || 'Type to search...' } />
-        <button className="input__clear" onClick={ this.onClear }>
-          <CloseIcon className="input__clear-icon" width="10" height="10" />
-        </button>
+          value={ value }
+          placeholder={ placeholder || 'Type to search...' }
+          onChange={ this.onChange } />
+        {
+          value && value.length && (
+            <button className="input__clear" onClick={ this.onClear }>
+            </button>
+          )
+        }
       </div>
     );
   }

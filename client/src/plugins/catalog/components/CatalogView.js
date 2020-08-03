@@ -119,6 +119,10 @@ class CatalogView extends PureComponent {
       selected
     } = this.state;
 
+    const {
+      catalogs
+    } = filter;
+
     const catalogNames = getCatalogNames(elementTemplates);
 
     return (
@@ -130,16 +134,12 @@ class CatalogView extends PureComponent {
           <div className="catalog__header">
             <h2 className="catalog__title">Templates</h2>
             <Input className="catalog__search" value={ filter.search } onChange={ this.onSearchChange } />
-            {/* <select className="catalog__filter">
-              {
-                catalogNames.map(catalogName => <option key={ catalogName } value={ catalogName }>{ catalogName }</option>)
-              }
-            </select> */}
+            <Dropdown className="catalog__catalogs" items={ catalogNames } checked={ catalogs } />
           </div>
 
           <ul className="catalog__body">
             {
-              elementTemplates.map(elementTemplate => {
+              filterElementTemplates(elementTemplates, filter).map(elementTemplate => {
                 const {
                   description,
                   id,
@@ -197,10 +197,41 @@ export default CatalogView;
 
 // helpers //////////
 
+function filterElementTemplates(elementTemplates, filter) {
+  return elementTemplates.filter(elementTemplate => {
+    const {
+      catalogs,
+      search
+    } = filter;
+
+    const catalogName = getCatalogName(elementTemplate);
+
+    if (catalogs && catalogs.length && !catalogs.includes(catalogName)) {
+      return false;
+    }
+
+    if (search && search.length && !elementTemplate.name.toLowerCase().includes(search.toLowerCase())) {
+      return false;
+    }
+
+    return true;
+  });
+}
+
 function getCatalogName(elementTemplate) {
   const { metadata } = elementTemplate;
 
-  return metadata && metadata.tags && metadata.tags.length && metadata.tags[ 0 ];
+  if (!metadata) {
+    return;
+  }
+
+  const { tags } = metadata;
+
+  if (!tags || !tags.length) {
+    return;
+  }
+
+  return tags[ 0 ];
 }
 
 function getCatalogNames(elementTemplates) {
