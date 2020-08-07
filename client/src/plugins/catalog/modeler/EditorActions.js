@@ -8,7 +8,7 @@
  * except in compliance with the MIT License.
  */
 
-export default class ApplyElementTemplate {
+export default class EditorActions {
   constructor(commandStack, editorActions, selection) {
     editorActions.register('applyElementTemplate', elementTemplate => {
       const selectedElements = selection.get();
@@ -35,11 +35,23 @@ export default class ApplyElementTemplate {
       const { type } = selectedElements[ 0 ];
 
       return type;
-    })
+    });
+
+    editorActions.register('getSelectedElementAppliedElementTemplate', () => {
+      const selectedElements = selection.get();
+
+      if (selectedElements.length !== 1) {
+        return null;
+      }
+
+      const { businessObject } = selectedElements[ 0 ];
+
+      return businessObject.get('camunda:modelerTemplate');
+    });
   }
 }
 
-ApplyElementTemplate.$inject = [
+EditorActions.$inject = [
   'commandStack',
   'editorActions',
   'selection'

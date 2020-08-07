@@ -10,10 +10,6 @@
 
 import React, { PureComponent } from 'react';
 
-import Fill from '../../app/slot-fill/Fill';
-
-import Button from '../../app/primitives/Button';
-
 import CatalogView from './components/CatalogView';
 
 import additionalModule from './modeler';
@@ -53,9 +49,13 @@ export default class Catalog extends PureComponent {
       return {
         ...config,
         additionalModules: [
-          ...config.additionalModules,
+          ...config.additionalModules || [],
           additionalModule
-        ]
+        ],
+        propertiesProvider: {
+          ...config.propertiesProvider || {},
+          openCatalogView: this.onOpen
+        }
       };
     });
   }
@@ -87,16 +87,13 @@ export default class Catalog extends PureComponent {
   render() {
     const { showModal } = this.state;
 
-    return <React.Fragment>
-      <Fill slot="toolbar">
-        <Button onClick={ this.onOpen }>Catalog</Button>
-      </Fill>
-      { showModal &&
+    return showModal
+      ? (
         <CatalogView
           onClose={ this.onClose }
           onApply={ this.onApply }
           { ...this.props } />
-      }
-    </React.Fragment>;
+      )
+      : null;
   }
 }

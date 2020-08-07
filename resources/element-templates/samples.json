@@ -40,5 +40,35 @@
         }
       }
     ]
+  },
+  {
+    "name": "Baz Task",
+    "description": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "id": "baz.task",
+    "appliesTo": [
+      "bpmn:Task",
+      "bpmn:ServiceTask"
+    ],
+    "properties": [
+      {
+        "label": "Name",
+        "type": "String",
+        "value": "Baz",
+        "editable": true,
+        "binding": {
+          "type": "property",
+          "name": "name"
+        }
+      }
+    ],
+    "metadata": {
+      "catalogOrganizationId": "00000000-0000-0000-0000-000000000000",
+      "catalogTemplateId": "00000000-0000-0000-0000-000000000000",
+      "created": 1111111111111,
+      "tags": [
+        "Foo Catalog"
+      ],
+      "updated": 1111111111111
+    }
   }
 ]

@@ -12,6 +12,9 @@ import React, { PureComponent } from 'react';
 
 import classNames from 'classnames';
 
+import CloseIcon from '../icons/Close.svg';
+import SearchIcon from '../icons/Search.svg';
+
 import css from './Input.less';
 
 export default class Input extends PureComponent {
@@ -43,10 +46,9 @@ export default class Input extends PureComponent {
           placeholder={ placeholder || 'Type to search...' }
           onChange={ this.onChange } />
         {
-          value && value.length && (
-            <button className="input__clear" onClick={ this.onClear }>
-            </button>
-          )
+          value && value.length
+            ? <button className="input__clear" onClick={ this.onClear }><CloseIcon width="10" height="10" /></button>
+            : <span className="input__search-icon"><SearchIcon width="10" height="10" /></span>
         }
       </div>
     );

@@ -8,9 +8,14 @@
  * except in compliance with the MIT License.
  */
 
-import ApplyElementTemplate from './ApplyElementTemplate';
+import EditorActions from './EditorActions';
+import PropertiesProvider from './PropertiesProvider';
 
 export default {
-  __init__: [ 'applyElementTemplate' ],
-  applyElementTemplate: [ 'type', ApplyElementTemplate ]
+  __init__: [
+    'catalogEditorActions',
+    'propertiesProvider'
+  ],
+  catalogEditorActions: [ 'type', EditorActions ],
+  propertiesProvider: [ 'type', PropertiesProvider ]
 };
